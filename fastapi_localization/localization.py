@@ -32,7 +32,7 @@ class TranslatableStringField(LazyString):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v, *args, **kwargs):
+    def validate(cls, v, info):
         return cls(v)
 
 
