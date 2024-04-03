@@ -18,7 +18,6 @@ class LocalizationRoute(APIRoute):
 
         async def custom_route_handler(request: Request) -> Response:
             response: Response = await original_route_handler(request)
-            print(f'custom route handler. Response content: {response.original_content}')
             if isinstance(response, TranslateJsonResponse):
                 return response.translate_content(request.state.gettext)
             return response

@@ -18,8 +18,6 @@ class SystemLocalizationMiddleware:
         self.domain = domain
 
     async def __call__(self, request: Request, call_next):
-        print('=========== SystemLocalizationMiddleware.__call__ ===============')
-
         language_code = request.headers.get('accept-language')
 
         if language_code:
