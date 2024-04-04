@@ -38,6 +38,14 @@ class TranslatableStringField(LazyString):
     def validate(cls, v, info):
         return cls(v)
 
+    @classmethod
+    def __get_pydantic_core_schema__(
+        cls, source: typing.Type[typing.Any], handler: GetCoreSchemaHandler
+    ) -> core_schema.CoreSchema:
+        return core_schema.no_info_after_validator_function (
+            cls.validate, handler(str),
+        )
+
 
 def lazy_gettext(string: str, **kwargs):
     """
