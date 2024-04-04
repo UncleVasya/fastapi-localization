@@ -24,7 +24,11 @@ class LocalizationRoute(APIRoute):
             @wraps(func)
             async def wrapper(*args, **kwargs) -> TranslateJsonResponse:
                 response_data = await func(*args, **kwargs)
-                return TranslateJsonResponse(content=response_data.model_dump())
+                if type(response_data) is list:
+                    content = [x.model_dump() for x in response_data]
+                else:
+                    content = response_data.model_dump()
+                return TranslateJsonResponse(content=content)
 
             return wrapper
 
